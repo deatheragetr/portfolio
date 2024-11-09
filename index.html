@@ -51,12 +51,22 @@
             background-color: #f0f0f0;
         }
 
-        .project img {
+        .project-image-container {
+            position: relative;
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border: 2px solid black;
+            padding-top: 75%; /* 4:3 Aspect Ratio */
             margin-bottom: 15px;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+
+        .project img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .project h2 {
@@ -69,12 +79,6 @@
             font-size: 1em;
         }
 
-        @media (max-width: 600px) {
-            .projects {
-                grid-template-columns: 1fr;
-            }
-        }
-
         /* Modal styles */
         .modal {
             display: none;
@@ -84,6 +88,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
         }
 
         .modal-content {
@@ -95,6 +100,98 @@
             border: 3px solid black;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        /* Carousel styles */
+        .carousel {
+            position: relative;
+            width: 100%;
+            padding-top: 66.67%; /* 3:2 Aspect Ratio */
+            margin-bottom: 20px;
+            border: 2px solid black;
+        }
+
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            user-select: none;
+        }
+
+        .carousel-button:hover {
+            background: #f0f0f0;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background: black;
         }
 
         .close-button {
@@ -110,36 +207,62 @@
             align-items: center;
             justify-content: center;
             background: white;
+            z-index: 20;
         }
 
         .close-button:hover {
             background: #f0f0f0;
         }
+
+        @media (max-width: 600px) {
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Your Name</h1>
-        <p>Portfolio / Projects / Work</p>
+        <h1>Thomas Raymond Deatherage</h1>
+        <p>Portfolio / Projects / Work / Etc</p>
     </header>
 
     <main class="projects">
         <a href="#project1" class="project" onclick="showModal('project1'); return false;">
-            <img src="/api/placeholder/400/320" alt="Project 1">
-            <h2>Project 1</h2>
-            <p>A brief description of your first project. This could be a website, app, or any other work you want to showcase.</p>
+            <div class="project-image-container">
+                <img src="images/biocosmos.png" alt="Project 1">
+            </div>
+            <h2>BioCosmos</h2>
+            <p><i>BioCosmos</i> is a conversational research tool for ecologists and citizen scientists.</p>
+            <br />
+            <p>Collaboration between the Georgia Institute of Technology and the Florida Museum of Natural History.</p>
         </a>
 
         <a href="#project2" class="project" onclick="showModal('project2'); return false;">
-            <img src="/api/placeholder/400/320" alt="Project 2">
-            <h2>Project 2</h2>
-            <p>Description of your second project. Keep it concise but informative enough to grab attention.</p>
+            <div class="project-image-container">
+                <img src="images/exchonk_1.png" alt="Project 2">
+            </div>
+            <h2>ExplainerChonk</h2>
+            <p><i>transitive verb</i> | \ ˈchȯŋk \</p>
+            <p>: to chew energetically : champ</p>
+            <br />
+            <p><i>ExplainerChonk</i> turns reading into dialogue.</p>
         </a>
 
         <a href="#project3" class="project" onclick="showModal('project3'); return false;">
-            <img src="/api/placeholder/400/320" alt="Project 3">
-            <h2>Project 3</h2>
-            <p>Overview of your third project. What problems did it solve? What technologies did you use?</p>
+            <div class="project-image-container">
+                <img src="images/il_principe.jpeg" alt="Piccolo project: Il piccolo principe with Oculus headset">
+            </div>
+            <h2>Piccolo</h2>
+            <p><i>Piccolo</i> is immersive VR language learning through interactive story telling.</p>
+        </a>
+
+        <a href="#project4" class="project" onclick="showModal('project4'); return false;">
+            <div class="project-image-container">
+                <img src="images/stockbin_1.png" alt="Stockbin UI Lo-Fi 1">
+            </div>
+            <h2>Stockbin</h2>
+            <p><i>Stockbin</i> reimagines stock photography in an era of cheap generative AI.</p>
         </a>
     </main>
 
@@ -147,14 +270,37 @@
     <div id="project1Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project1')">×</button>
-            <h2>Project 1 Details</h2>
-            <img src="/api/placeholder/400/320" alt="Project 1 Detail">
-            <p>Detailed description of Project 1. Include technologies used, your role, challenges overcome, and results achieved.</p>
+            <h2>BioCosmos</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="images/biocosmos.png" alt="BioCosmos - Image 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="/api/placeholder/800/600" alt="Project 1 - Image 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="/api/placeholder/800/600" alt="Project 1 - Image 3">
+                    </div>
+                </div>
+                <button class="carousel-button prev" onclick="changeSlide(-1, this)">←</button>
+                <button class="carousel-button next" onclick="changeSlide(1, this)">→</button>
+                <div class="carousel-dots"></div>
+            </div>
+            <p></p>
+            <br />
+            <p>Researchers interact with an LLM chat interface, which answers and/or dispatches research questions to task-optimized models.</p>
+            <br />
+            <p>Some examples of tasks: Species classification, trait grounding, trait referral, and handling novel general and specific knowledge queries.</p>
+            <br />
+            <p>Paper(s) forthecoming.</p>
+            <br />
+            <p><b>Source Code</b>: https://github.com/bioCosmos-AI/BioCosmos/</p>
             <h3>Technologies Used:</h3>
             <ul>
-                <li>Technology 1</li>
-                <li>Technology 2</li>
-                <li>Technology 3</li>
+                <li>InternVL (https://github.com/OpenGVLab/InternVL)</li>
+                <li>Florence2 (https://huggingface.co/microsoft/Florence-2-large)</li>
+                <li>UNICOM (https://github.com/deepglint/unicom)</li>
             </ul>
         </div>
     </div>
@@ -162,14 +308,34 @@
     <div id="project2Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project2')">×</button>
-            <h2>Project 2 Details</h2>
-            <img src="/api/placeholder/400/320" alt="Project 2 Detail">
-            <p>Detailed description of Project 2. What made this project unique? What was your contribution?</p>
-            <h3>Key Features:</h3>
+            <h2>ExplainerChonk</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="images/exchonk_1.png" alt="BioCosmos - Image 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/exchonk_3.png" alt="Project 1 - Image 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/exchonk_2.png" alt="Project 1 - Image 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/exchonk_4.png" alt="Project 1 - Image 3">
+                    </div>
+                </div>
+                <button class="carousel-button prev" onclick="changeSlide(-1, this)">←</button>
+                <button class="carousel-button next" onclick="changeSlide(1, this)">→</button>
+                <div class="carousel-dots"></div>
+            </div>
+            <p><i>ExplainerChonk</i> is a deep dive into the interactive possiblities of LLMs, beyond chat interfaces.</p>
+            <p>My vision is to expedite comprehensions of texts, with an eye toward students and academics.  In a sense, a virutal expert tutor on any topic.</p>
+            <br />
+            <p><b>Source Code</b>: https://github.com/deatheragetr/explainer-chunk</p>
+            <h3>Technologies Used:</h3>
             <ul>
-                <li>Feature 1</li>
-                <li>Feature 2</li>
-                <li>Feature 3</li>
+                <li>ChatGPT</li>
+                <li>Pinecone</li>
             </ul>
         </div>
     </div>
@@ -177,27 +343,121 @@
     <div id="project3Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project3')">×</button>
-            <h2>Project 3 Details</h2>
-            <img src="/api/placeholder/400/320" alt="Project 3 Detail">
-            <p>In-depth look at Project 3. Discuss the impact of this project and any interesting technical challenges.</p>
-            <h3>Achievements:</h3>
+            <h2>Piccolo</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="images/il_principe.jpeg" alt="Little Prince books with Oculus headset">
+                    </div>
+                </div>
+                <button class="carousel-button prev" onclick="changeSlide(-1, this)">←</button>
+                <button class="carousel-button next" onclick="changeSlide(1, this)">→</button>
+                <div class="carousel-dots"></div>
+            </div>
+            <p><i>Piccolo</i> is a deep dive into the interactive possiblities of LLMs, beyond chat interfaces.</p>
+            <h3>Technologies Used:</h3>
             <ul>
-                <li>Achievement 1</li>
-                <li>Achievement 2</li>
-                <li>Achievement 3</li>
+                <li>Oculus Quest</li>
+                <li>Unity</li>
+                <li>ChatGPT</li>
             </ul>
         </div>
     </div>
 
+    <div id="project4Modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="hideModal('project4')">×</button>
+            <h2>Stockbin</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="images/stockbin_1.png" alt="Stockbin UI lofi 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/stockbin_2.png" alt="Stockbin UI lofi 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/stockbin_3.png" alt="Stockbin UI lofi 3">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/stockbin_4.png" alt="Stockbin UI lofi 4">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/stockbin_5.png" alt="Stockbin UI lofi 5">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/stockbin_6.png" alt="Stockbin UI lofi 6">
+                    </div>
+                </div>
+                <button class="carousel-button prev" onclick="changeSlide(-1, this)">←</button>
+                <button class="carousel-button next" onclick="changeSlide(1, this)">→</button>
+                <div class="carousel-dots"></div>
+            </div>
+            <p><i>Stockbin</i></p>
+            <h3>Technologies Used:</h3>
+            <ul>
+                <li>Stable Diffusion</li>
+                <li>InternVL</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Similar modals for Project 2 and 3... -->
+
     <script>
         function showModal(projectId) {
-            document.getElementById(projectId + 'Modal').style.display = 'block';
+            const modal = document.getElementById(projectId + 'Modal');
+            modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            
+            // Initialize carousel dots
+            const carousel = modal.querySelector('.carousel');
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dotsContainer = carousel.querySelector('.carousel-dots');
+            
+            dotsContainer.innerHTML = '';
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(index, carousel);
+                dotsContainer.appendChild(dot);
+            });
         }
 
         function hideModal(projectId) {
             document.getElementById(projectId + 'Modal').style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+
+        function changeSlide(direction, button) {
+            const carousel = button.closest('.carousel');
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+            
+            // Calculate new index
+            let newIndex = currentIndex + direction;
+            if (newIndex >= slides.length) newIndex = 0;
+            if (newIndex < 0) newIndex = slides.length - 1;
+            
+            // Update slides
+            slides[currentIndex].classList.remove('active');
+            slides[newIndex].classList.add('active');
+            
+            // Update dots
+            dots[currentIndex].classList.remove('active');
+            dots[newIndex].classList.add('active');
+        }
+
+        function goToSlide(index, carousel) {
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
         }
 
         // Close modal when clicking outside
