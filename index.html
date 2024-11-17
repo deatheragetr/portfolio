@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brutalist Portfolio</title>
+    <title>Thomas Deatherage</title>
     <style>
         * {
             margin: 0;
@@ -279,6 +279,36 @@
 
         .header-text {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;  /* Align items to the left */
+            gap: 5px;
+        }
+
+        .cv-link {
+            display: inline-block;
+            border: 2px solid black;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            width: auto;  /* Let content determine width */
+        }
+
+        .cv-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        .profession-text {
+          background-image: linear-gradient(to bottom, transparent 0.19em, #fff003 0.19em, #fff003 0.91em, transparent 0.91em);
+        }
+
+        @media (max-width: 600px) {
+            .header-text {
+                align-items: center;
+            }
         }
 
         @media (max-width: 600px) {
@@ -292,19 +322,23 @@
                 margin-bottom: 15px;
             }
 
-        @media (max-width: 600px) {
             .projects {
                 grid-template-columns: 1fr;
             }
+            .header-text {
+                align-items: center;
+            }
         }
+
     </style>
 </head>
 <body>
     <header>
         <img src="images/profile.jpg" alt="Thomas Raymond Deatherage" class="profile-image">
         <div class="header-text">
-            <h1>Thomas Raymond Deatherage</h1>
+            <h1 class="profession-text">Thomas Raymond Deatherage</h1>
             <p>Computer Programmer</p>
+            <a href="CV.pdf" class="cv-link">VIEW CV</a>
         </div>
     </header>
 
