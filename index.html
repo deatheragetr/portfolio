@@ -213,6 +213,84 @@
         .close-button:hover {
             background: #f0f0f0;
         }
+            .magnified-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            cursor: zoom-out;
+        }
+
+        .magnified-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            border: 3px solid white;
+        }
+
+        /* Magnify button */
+        .magnify-button {
+            position: absolute;
+            right: 70px;  /* Position it next to the close button */
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .magnify-button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Add a cursor indicator for zoomable images */
+        .carousel-slide img {
+            cursor: zoom-in;
+        }
+        header {
+            border: 3px solid black;
+            padding: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            object-fit: cover;
+        }
+
+        .header-text {
+            flex-grow: 1;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin-bottom: 15px;
+            }
 
         @media (max-width: 600px) {
             .projects {
@@ -223,8 +301,11 @@
 </head>
 <body>
     <header>
-        <h1>Thomas Raymond Deatherage</h1>
-        <p>Portfolio / Projects / Work / Etc</p>
+        <img src="images/profile.jpg" alt="Thomas Raymond Deatherage" class="profile-image">
+        <div class="header-text">
+            <h1>Thomas Raymond Deatherage</h1>
+            <p>Computer Programmer</p>
+        </div>
     </header>
 
     <main class="projects">
@@ -270,6 +351,7 @@
     <div id="project1Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project1')">×</button>
+            <button class="magnify-button" onclick="toggleMagnify(this)">🔍</button>
             <h2>BioCosmos</h2>
             <div class="carousel">
                 <div class="carousel-container">
@@ -277,10 +359,10 @@
                         <img src="images/biocosmos.png" alt="BioCosmos - Image 1">
                     </div>
                     <div class="carousel-slide">
-                        <img src="/api/placeholder/800/600" alt="Project 1 - Image 2">
+                        <img src="images/biocosmos_2.png" alt="Project 1 - Image 2">
                     </div>
                     <div class="carousel-slide">
-                        <img src="/api/placeholder/800/600" alt="Project 1 - Image 3">
+                        <img src="images/biocosmos_3.png" alt="Project 1 - Image 3">
                     </div>
                 </div>
                 <button class="carousel-button prev" onclick="changeSlide(-1, this)">←</button>
@@ -289,18 +371,20 @@
             </div>
             <p></p>
             <br />
-            <p>Researchers interact with an LLM chat interface, which answers and/or dispatches research questions to task-optimized models.</p>
+
+            <p><i>BioCosmos</i> is an index of life on Earth.  A team of hyper-specialized machine learning models answer novel research inquries, while a generalized LLM controller dispatches requests to the appropriate expert model.</p>
             <br />
-            <p>Some examples of tasks: Species classification, trait grounding, trait referral, and handling novel general and specific knowledge queries.</p>
+            <p>Collaboration between the <a href="https://www.biovisionlab.com/">University of Florida's BioVision Lab</a> and <a href="https://sites.gatech.edu/human-augmented-analytics-group/">HAAG at GaTech</a></p>
             <br />
             <p>Paper(s) forthecoming.</p>
             <br />
-            <p><b>Source Code</b>: https://github.com/bioCosmos-AI/BioCosmos/</p>
+            <p><b>Source Code</b>: <a href="https://github.com/bioCosmos-AI/BioCosmos/">https://github.com/bioCosmos-AI/BioCosmos/</a></p>
+            <br />
             <h3>Technologies Used:</h3>
             <ul>
-                <li>InternVL (https://github.com/OpenGVLab/InternVL)</li>
-                <li>Florence2 (https://huggingface.co/microsoft/Florence-2-large)</li>
-                <li>UNICOM (https://github.com/deepglint/unicom)</li>
+                <li>InternVL (<a href="https://github.com/OpenGVLab/InternVL">https://github.com/OpenGVLab/InternVL</a>)</li>
+                <li>Florence2 (<a href="https://huggingface.co/microsoft/Florence-2-large">https://huggingface.co/microsoft/Florence-2-large</a>)</li>
+                <li>UNICOM (<a href="https://github.com/deepglint/unicom">https://github.com/deepglint/unicom</a>)</li>
             </ul>
         </div>
     </div>
@@ -308,6 +392,7 @@
     <div id="project2Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project2')">×</button>
+            <button class="magnify-button" onclick="toggleMagnify(this)">🔍</button>
             <h2>ExplainerChonk</h2>
             <div class="carousel">
                 <div class="carousel-container">
@@ -328,10 +413,10 @@
                 <button class="carousel-button next" onclick="changeSlide(1, this)">→</button>
                 <div class="carousel-dots"></div>
             </div>
-            <p><i>ExplainerChonk</i> is a deep dive into the interactive possiblities of LLMs, beyond chat interfaces.</p>
-            <p>My vision is to expedite comprehensions of texts, with an eye toward students and academics.  In a sense, a virutal expert tutor on any topic.</p>
+            <p><i>ExplainerChonk</i> is a deep dive into the interactive possiblities of LLMs beyond chat interfaces.</p>
+            <p>My vision is to expedite comprehension of texts, with an eye toward students and academics.  In a sense, a virtual expert tutor on any topic.</p>
             <br />
-            <p><b>Source Code</b>: https://github.com/deatheragetr/explainer-chunk</p>
+            <p><b>Source Code</b>: <a href="https://github.com/deatheragetr/explainer-chunk">https://github.com/deatheragetr/explainer-chunk</a></p>
             <h3>Technologies Used:</h3>
             <ul>
                 <li>ChatGPT</li>
@@ -343,6 +428,7 @@
     <div id="project3Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project3')">×</button>
+            <button class="magnify-button" onclick="toggleMagnify(this)">🔍</button>
             <h2>Piccolo</h2>
             <div class="carousel">
                 <div class="carousel-container">
@@ -367,6 +453,7 @@
     <div id="project4Modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="hideModal('project4')">×</button>
+            <button class="magnify-button" onclick="toggleMagnify(this)">🔍</button>
             <h2>Stockbin</h2>
             <div class="carousel">
                 <div class="carousel-container">
@@ -402,7 +489,12 @@
         </div>
     </div>
 
-    <!-- Similar modals for Project 2 and 3... -->
+    <div id="magnified-overlay" class="magnified-overlay">
+      <img class="magnified-image" src="" alt="Magnified view">
+    </div>
+
+
+    <!-- ... -->
 
     <script>
         function showModal(projectId) {
@@ -421,6 +513,29 @@
                 dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
                 dot.onclick = () => goToSlide(index, carousel);
                 dotsContainer.appendChild(dot);
+            });
+
+            // Add magnify button if it doesn't exist
+            if (!modal.querySelector('.magnify-button')) {
+                const magnifyBtn = document.createElement('button');
+                magnifyBtn.className = 'magnify-button';
+                magnifyBtn.innerHTML = '🔍';
+                magnifyBtn.onclick = function() { toggleMagnify(this); };
+                modal.querySelector('.modal-content').appendChild(magnifyBtn);
+            }
+
+            // Add click handlers for images in this modal
+            const carouselImages = modal.querySelectorAll('.carousel-slide img');
+            carouselImages.forEach(img => {
+                img.onclick = function() {
+                    const overlay = document.getElementById('magnified-overlay');
+                    const magnifiedImg = overlay.querySelector('.magnified-image');
+                    // Get the currently active slide's image
+                    const activeSlide = modal.querySelector('.carousel-slide.active img');
+                    magnifiedImg.src = activeSlide.src;
+                    magnifiedImg.alt = activeSlide.alt;
+                    overlay.style.display = 'block';
+                };
             });
         }
 
@@ -460,6 +575,22 @@
             dots[index].classList.add('active');
         }
 
+        function toggleMagnify(button) {
+            const modal = button.closest('.modal');
+            const activeSlide = modal.querySelector('.carousel-slide.active img');
+            const overlay = document.getElementById('magnified-overlay');
+            const magnifiedImg = overlay.querySelector('.magnified-image');
+            
+            magnifiedImg.src = activeSlide.src;
+            magnifiedImg.alt = activeSlide.alt;
+            overlay.style.display = 'block';
+        }
+
+        // Add click handler for the overlay to close it
+        document.getElementById('magnified-overlay').onclick = function() {
+            this.style.display = 'none';
+        };
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
@@ -467,6 +598,7 @@
                 document.body.style.overflow = 'auto';
             }
         }
+
     </script>
 </body>
 </html>
